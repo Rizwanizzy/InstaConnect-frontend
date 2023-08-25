@@ -7,21 +7,25 @@ import Signup from "./pages/Signup/Signup"
 import Activation from "./pages/Activation/Activation"
 import Passwordreset from "./pages/Passwordreset/Passwordreset"
 import Passwordresetconfirm from "./pages/Passwordresetconfirm/Passwordresetconfirm"
+import { Provider } from "react-redux";
+import store from "./store";
 
 const App = () => {
   const history=createBrowserHistory()
   return (
     <div>
-      <Router>
-        <Routes history={history}>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/activation" element={<Activation />} />
-            <Route path="/passwordreset" element={<Passwordreset />} />
-            <Route path="/passwordresetconfirm" element={<Passwordresetconfirm />} />
-        </Routes>
-      </Router>
+      <Provider store={store}>
+        <Router  history={history}>
+          <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/activation" element={<Activation />} />
+              <Route path="/passwordreset" element={<Passwordreset />} />
+              <Route path="/passwordresetconfirm" element={<Passwordresetconfirm />} />
+          </Routes>
+        </Router>
+      </Provider>
     </div>
   );
 }
