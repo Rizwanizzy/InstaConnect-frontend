@@ -1,11 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import { logout } from '../../action/authentication/logoutAction'
+import Login from '../Login/Login';
+import { Navigate } from 'react-router';
 
-const Home = () =>{
-    return(
-        <div >
-            <h1>Home page</h1>
-        </div>
-    )
+const Home = ({logout}) => {
+const [navigate, setNavigate] = useState(false)
+const logout_user = () => {
+logout();
+setNavigate(true)
+}
+if(navigate){
+    return <Navigate to = '/login'/>
 }
 
-export default Home
+return (
+<div>
+   {localStorage.getItem('access') ?  <button onClick={logout_user}>Logout</button>: <Login/> }
+</div>
+)
+}
+const mapDispatchToProps = {
+logout : logout
+}
+export default connect(null, mapDispatchToProps)(Home)

@@ -1,10 +1,10 @@
-import {signupTypes} from '../../types/authentication'
+import {registrationTypes} from '../../types/authentication'
 import {GET_ERRORS} from '../../types/error'
 import axios from 'axios'
 
-export const signup = (first_name,last_name,email,password) => async dispatch =>{
+export const registration = (first_name,last_name,email,password) => async dispatch => {
     dispatch({
-        type:signupTypes.SIGNUP_REQUEST
+        type:registrationTypes.SIGNUP_REQUEST
     })
     const configuration = {
         headers:{
@@ -13,16 +13,15 @@ export const signup = (first_name,last_name,email,password) => async dispatch =>
     }
     const data =JSON.stringify({first_name,last_name,email,password})
     try{
-        console.log(first_name,last_name,email,password)
         await axios.post(`${process.env.REACT_APP_API_URL}/auth/users/`,data,configuration)
         dispatch({
-            type:signupTypes.SIGNUP_SUCCESS
+            type:registrationTypes.SIGNUP_SUCCESS,
         })
     }
     catch(err){
         const error = {msg:err.response.data,status:err.response.status}
         dispatch({
-            type:signupTypes.SIGNUP_FAIL
+            type:registrationTypes.SIGNUP_FAIL
         })
         dispatch({
             type:GET_ERRORS,

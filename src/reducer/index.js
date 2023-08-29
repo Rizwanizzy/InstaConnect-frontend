@@ -1,10 +1,11 @@
-import {combineReducers} from 'redux'
-import { signupReducer } from './authentication/signupReducer'
-import { errorReducer } from './errorReducer/errorReducer'
+import { combineReducers } from "redux";
+import { registrationReducer ,activationReducer,loginReducer } from "./authentication";
+import { errorReducer } from "./errorReducer/errorReducer";
 
-const rootReducer =combineReducers({
-    signupReducer,
+const rootReducer = combineReducers({
+    registrationReducer,
+    activationReducer,
+    loginReducer,
     errorReducer
-})
-
-export default rootReducer
+});
+export default rootReducer;

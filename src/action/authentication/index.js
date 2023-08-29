@@ -1,1 +1,2 @@
-export * from './signupActions'
+export * from './registrationActions'
+export * from './activationActions'

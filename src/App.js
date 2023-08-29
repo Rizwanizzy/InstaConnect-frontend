@@ -5,10 +5,12 @@ import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login"
 import Signup from "./pages/Signup/Signup"
 import Activation from "./pages/Activation/Activation"
+import Activate from "./pages/Activation/Activate"
 import Passwordreset from "./pages/Passwordreset/Passwordreset"
 import Passwordresetconfirm from "./pages/Passwordresetconfirm/Passwordresetconfirm"
 import { Provider } from "react-redux";
 import store from "./store";
+import './App.css'
 
 const App = () => {
   const history=createBrowserHistory()
@@ -20,7 +22,8 @@ const App = () => {
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
-              <Route path="/activation" element={<Activation />} />
+              <Route path="/activate" element={<Activate />} />
+              <Route path="/activate/:uid/:token" element={<Activation />} />
               <Route path="/passwordreset" element={<Passwordreset />} />
               <Route path="/passwordresetconfirm" element={<Passwordresetconfirm />} />
           </Routes>
