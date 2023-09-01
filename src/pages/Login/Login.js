@@ -10,7 +10,7 @@ import * as yup from 'yup'
 import { Navigate } from 'react-router-dom';
 import ReactGoogleLogin from 'react-google-login'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
-import loginImage from '../../images/login_image.PNG'
+import loginImage1 from '../../images/login_image1.png'
 import appStores from '../../images/appstore.png'
 import styled from 'styled-components'
 import '../../assets/css/fonts.css'
@@ -257,7 +257,7 @@ if(localStorage.getItem('access')){
 return (
 <Wrapper>
     <LeftDiv>
-        <Img src={loginImage} alt='login Image'/>
+        <Img src={loginImage1} alt='login Image'/>
     </LeftDiv>
     <RightDiv>
         <Form onSubmit = {handleSubmit(onSubmit)}>
