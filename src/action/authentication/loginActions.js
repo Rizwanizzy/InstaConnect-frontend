@@ -14,15 +14,21 @@ const configuration = {
 const data = JSON.stringify({email,password})
 try {
     const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/jwt/create/`, data, configuration )
-    console.log(res)
+    const payload={
+        ...res.data
+    }
+    console.log('payload',payload)
     dispatch({
         type : loginTypes.LOGIN_SUCCESS,
-        payload : res.data
+        payload,
     })
 }
 catch(err){
     console.log(err.response.data)
-    const error = {msg : err.response.data, status: err.response.status }
+    const error = {
+        msg : err.response.data, 
+        status: err.response.status 
+    }
     dispatch({
         type : loginTypes.LOGIN_FAILURE,
     })

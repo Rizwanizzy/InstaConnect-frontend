@@ -1,15 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
-import { login } from '../../action/authentication/loginActions';
-import { googleLogin } from '../../action/authentication/googleLoginAction';
-import { facebookLogin } from '../../action/authentication/facebookLoginAction';
+import { adminLogin } from '../../action/authentication/adminLoginActions';
 import { useForm } from 'react-hook-form'
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from 'yup'
 import { Navigate } from 'react-router-dom';
-import ReactGoogleLogin from 'react-google-login'
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import loginImage from '../../images/login_image.PNG'
 import appStores from '../../images/appstore.png'
 import styled from 'styled-components'
@@ -119,38 +115,6 @@ cursor: pointer;
 margin-top: 5px;
 font-family:Roboto Medium
 `
-const FbButton = styled.button`
-background: #4267b2;
-border: none;
-color: white;
-width:100%;
-height:30px;
-padding: 5px;
-border-radius:5px;
-text-align: center;
-text-decoration: none;
-display: inline-block;
-font-size: 14px;
-cursor: pointer;
-margin-top: 10px;
-font-family:Roboto Medium
-`;
-const GoogleBtn = styled.button`
-background: #db3236;
-border: none;
-color: white;
-width:100%;
-height:30px;
-padding: 5px;
-border-radius:5px;
-text-align: center;
-text-decoration: none;
-display: inline-block;
-font-size: 14px;
-cursor: pointer;
-margin-top: 5px;
-font-family:Roboto Medium;
-`
 const ErroDiv = styled.div`
 grid-column-start:1;
 grid-column-end: 13;
@@ -174,25 +138,6 @@ background-color:white;
     width:360px;
   }
 `
-const SecondDiv = styled.div`
-grid-column-start:1;
-grid-column-end: 13;
-background-color:white;
-padding: 20px;
-width:380px;
-border-radius:2px;
-margin-top:10px;
-border 1px solid #ECECEC;
-color:#262626;
-text-align:center;
-@media (min-width:320px) and (max-width:480px){
-    width:340px;
-  }
-@media (min-width:411px) and (max-width:768px) {
-    width:370px;
-  }
-`
-
 const ThirdDiv = styled.div`
 grid-column-start:1;
 grid-column-end: 13;
@@ -234,25 +179,27 @@ let LoginSchema = yup.object().shape({
     email: yup.string().email().required('Enter Email'),
     password:yup.string().required('Enter password')
 })
-const Login = ({login,googleLogin, facebookLogin, isLoading, isLoggedIn, errMsg,status}) =>{
+const AdminLogin = ({login, isLoading, isLoggedIn, errMsg,status,userRole}) =>{
 const {register, handleSubmit, formState: { errors, isValid}} =useForm({
     resolver: yupResolver(LoginSchema),
     mode: "onChange" ,
 })
-const responseFacebook = (response) => {
-    let fbResponse  =  facebookLogin(response.accessToken)
-    console.log(fbResponse);
-  }
-const responseGoogle = response => {
-    let googleResponse  =  googleLogin(response.accessToken)
-    console.log(googleResponse)
-  }
-
+console.log('before onbumit in adminlogin page')
 const onSubmit = (data) => {
-  login(...Object.values(data))
+  adminLogin(data.email, data.password)
 }
+
+useEffect(() =>{
+  if ( userRole === 'superuser' ){
+    console.log('user role:',userRole);
+  }else{
+    console.log("user role:",userRole)
+    console.log("superuser cannot log in")
+  }
+},[userRole])
+
 if(localStorage.getItem('access')){
-    return <Navigate to='/'/>
+    return <Navigate to='/adminHome'/>
 }
 return (
 <Wrapper>
@@ -262,7 +209,7 @@ return (
     <RightDiv>
         <Form onSubmit = {handleSubmit(onSubmit)}>
                 <FormDiv>
-                    <H2>Instaconnect</H2>
+                    <H2>Admin Instaconnect</H2>
                 </FormDiv>
                 <FormDiv>
                     <Input type= 'email' {...register("email")} placeholder = 'Email' />
@@ -272,7 +219,7 @@ return (
                 </FormDiv>
                 <FormDiv>
                     {isValid ? <Button type='submit'>{isLoading?<Spinner/>:'Log In'}</Button>:<DisabledButton>Log In</DisabledButton>}
-                    {isLoggedIn && <Navigate to='/'/>}
+                    {isLoggedIn && <Navigate to='/adminHome'/>}
                 </FormDiv>
             <ErroDiv>
                    {errors.email && <p> {errors.email.message} </p>} 
@@ -282,34 +229,10 @@ return (
             </ErroDiv>
         </Form>
         <SocialMediaDiv>
-                <ReactGoogleLogin
-                    clientId="563646483738-3pblqrcm9uang431ja99qu8ke2kv13ob.apps.googleusercontent.com"
-                    buttonText="Login"
-                    onSuccess={responseGoogle}
-                    onFailure={responseGoogle}
-                    render={renderProps => (
-                        <GoogleBtn
-                           onClick={renderProps.onClick}>
-                           Continue With Google
-                        </GoogleBtn>
-                      )}
-                    />
-                <FacebookLogin
-                    appId="550250432986199"
-                    fields="name,email,picture"
-                    callback={responseFacebook}
-                    render={renderProps => (
-                        <FbButton
-                           onClick={renderProps.onClick}>
-                           Continue With Facebook
-                        </FbButton>
-                      )}
-                    />
             <FormDiv>
                 <Link to='password-reset' style={{ textDecoration: 'none', fontSize:'12px', color:'#00376B', marginTop:'5px' }}>Forgot Password?</Link>
             </FormDiv>
         </SocialMediaDiv>
-        <SecondDiv>Don't have an account?<Link to='/signup' style={{ textDecoration: 'none', color:'#0095F6' }}> Sign up</Link></SecondDiv>
         <ThirdDiv>
             <p>Get the app.</p>
             <img style={{ width:'300px', marginLeft:'30px'}} src={appStores} alt='Get the app'/>
@@ -320,16 +243,15 @@ return (
 }
 const mapStateToProps = state => {
     return {
-        isLoading: state.loginReducer.isLoading,
-        isLoggedIn: state.loginReducer.isLoggedIn,
+        isLoading: state.adminLoginReducer.isLoading,
+        isLoggedIn: state.adminLoginReducer.isLoggedIn,
         errMsg: state.errorReducer.msg,
         status: state.errorReducer.status,
-        errStatus: state.errorReducer.status
+        errStatus: state.errorReducer.status,
+        userRole:state.adminLoginReducer.userRole
     }
 }
 const mapDispatchToProps = {
-login:login,
-googleLogin:googleLogin,
-facebookLogin:facebookLogin
+adminLogin:adminLogin,
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(AdminLogin)

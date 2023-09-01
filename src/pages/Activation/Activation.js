@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import { activation } from '../../action/authentication/activationActions'
 import { Navigate } from 'react-router'
 import { Link } from 'react-router-dom'
+import logo from '../../images/logo.png'
+import { useParams } from 'react-router'
 
 const Wrapper = styled.div `
 display : grid;
@@ -84,19 +86,23 @@ cursor: pointer;
 margin-top:20px;
 font-family:Roboto Medium
 `
+const Img = styled.img`
+width:100px;
+margin-bottom:5px;
+`
 
-const Activation = ({activating,activation,match,isActivated,errMsg}) => {
-  const activate = e =>{
-    const uid = match.params.uid
-    const token =match.params.token
-    console.log(uid,token)
+const Activation = ({activating,activation,isActivated,errMsg}) => {
+  const {uid,token} =useParams()
+  
+  const activate = e =>{  
     activation(uid,token)
   }
   return (
     <Wrapper>
       <Div>
         <InnerDiv>
-          <H2>Activation</H2>
+          <Img src={logo} alt='password Reset'/>
+          <H2>Instaconnect</H2>
           <H4>Please verify the Account</H4>
           <Button type='submit' onClick={activate}>{activating? <Spinner/>:'Verify'}</Button>
           {isActivated && <Navigate to='/'/>}

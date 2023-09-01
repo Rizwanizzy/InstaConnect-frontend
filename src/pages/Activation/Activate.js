@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import logo from '../../images/logo.png'
+
 const Wrapper = styled.div `
 display : grid;
 grid-column-gap : 0;
@@ -50,7 +52,7 @@ const Activate = () => {
     <Wrapper>
       <Div>
           <InnerDiv>
-          <Img src="" alt="" />
+          <Img src={logo} alt="" />
           <H2>Instaconnect</H2>
           <H3>please verify account</H3>
           <H4>An activation link has been sent to your email</H4>

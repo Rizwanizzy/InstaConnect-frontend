@@ -1,5 +1,6 @@
 export * from './registrationReducer'
 export * from './activationReducer'
 export * from './loginReducer'
+export * from './adminLoginReducer'
 // export * from './passwordresetReducer'
 // export * from './passwordresetConfirmReducer'

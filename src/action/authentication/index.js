@@ -1,2 +1,5 @@
 export * from './registrationActions'
 export * from './activationActions'
+export * from './loginActions'
+export * from './googleLoginAction'
+export * from './facebookLoginAction'
