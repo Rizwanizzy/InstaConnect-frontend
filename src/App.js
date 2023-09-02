@@ -11,7 +11,10 @@ import Passwordresetconfirm from "./pages/Passwordresetconfirm/Passwordresetconf
 import { Provider } from "react-redux";
 import store from "./store";
 import './App.css'
+import Create from "./navigation/navigateTo/Create";
 import AdminLogin from "./pages/adminLogin/adminLogin";
+import UserProfile from "./navigation/navigateTo/UserProfile";
+
 
 const App = () => {
   const history=createBrowserHistory()
@@ -22,6 +25,8 @@ const App = () => {
           <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/userprofile" element={<UserProfile />} />
+              <Route path="/create" element={<Create />} />
               <Route path="/adminlogin" element={<AdminLogin />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/activate" element={<Activate />} />

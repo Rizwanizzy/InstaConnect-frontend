@@ -1,9 +1,9 @@
-// import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { logout } from '../../action/authentication/logoutAction';
 // import Login from '../Login/Login';
-// import { Navigate } from 'react-router';
-// import styled from 'styled-components';
+import { Navigate } from 'react-router';
+import styled from 'styled-components';
 import Sidenav from '../../navigation/Sidenav';
 import Timeline from '../../timeline/Timeline';
 import './Home.css'
@@ -38,34 +38,32 @@ import './Home.css'
 // //   border-radius: 50%;
 // // `;
 
-// const LogoutButton = styled.button`
-//   background-color: #ffff;
-//   border: none;
-//   cursor: pointer;
-//   color: #0095f6;
-//   font-weight: bold;
-// `;
+const LogoutButton = styled.button`
+  background-color: #ffff;
+  border: none;
+  cursor: pointer;
+  color: #0095f6;
+  font-weight: bold;
+`;
 
 const Home = ({ logout }) => {
-  // const [navigate, setNavigate] = useState(false);
+  const [navigate, setNavigate] = useState(false);
 
-  // const logout_user = () => {
-  //   logout();
-  //   setNavigate(true);
-  // };
+  const logout_user = () => {
+    logout();
+    setNavigate(true);
+  };
 
-  // if (navigate) {
-  //   return <Navigate to="/login" />;
-  // }
+  if (navigate) {
+    return <Navigate to="/login" />;
+  }
 
   return (
     // <Wrapper>
     //   <Container>
     //     <Header>
     //       <h1>Instagram</h1>
-    //       {localStorage.getItem('access') && (
-    //         <LogoutButton onClick={logout_user}>Logout</LogoutButton>
-    //       )}
+    //       
     //     </Header>
     //     <p>Welcome to Instagram! Connect with friends and the world around you.</p>
     //     {localStorage.getItem('access') ? (
@@ -78,8 +76,10 @@ const Home = ({ logout }) => {
     <div className="homepage">
       <div className="homepage__nav">
         <Sidenav />
+        {localStorage.getItem('access') && (
+            <LogoutButton onClick={logout_user}>Logout</LogoutButton>
+          )}
       </div>
-
       <div className="homepage__timeline">
         <Timeline />
       </div>

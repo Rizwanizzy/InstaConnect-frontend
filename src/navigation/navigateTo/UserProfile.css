@@ -1,0 +1,136 @@
+.userPage{
+    display: flex;
+    flex-direction: row;
+}
+
+.homepage__nav{
+    flex: 0.2;
+}
+
+button {
+    cursor: pointer;
+    padding: unset;
+    border: unset;
+    background: unset;
+    transition: all 0.2s ease-in-out;
+    border-radius: 5px;
+  }
+  
+
+.userProfile{
+    margin: 0;
+    flex: 0.8;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0em 0em 2em 5em;
+    border-bottom: 0.01px solid #605d5d;
+    margin-top: 4em;
+    margin-bottom: 2em;
+}
+
+.userProfile > input{
+    display: none;
+}
+
+.profile__photo {
+    background: #000;
+    width: 10em;
+    height: 10em;
+    border-radius: 50%;
+    margin-top: 0.5em;
+    margin-left: 100px;
+  }
+
+  @media screen and (max-width: 600px) {
+    .profile__photo {
+      width: 5em;
+      height: 5em;
+      margin-top: 3em;
+      margin-right: 2em;
+    }
+  }
+
+  .profile__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .profile__photo img:hover {
+    opacity: 0.7;
+  }
+
+  .profile__info .name {
+    font-size: 1.7em;
+    color: #545454;
+    margin-bottom: 0;
+  }
+  
+  .profile__info .about {
+    font-size: 1.2em;
+    color: #545454;
+  }
+  
+  .profile__info button {
+    background-color: #0095f6;
+    color: #fff;
+    font-size: 1.1em;
+    width: 6em;
+    height: 2em;
+  }
+  
+.userName{
+    display: flex;
+    align-items: center;
+}
+
+.edit{
+    margin-top: 23px;
+    margin-left: 10px;
+}
+
+  .profile__info button:hover {
+    background-color: #0081d6;
+  }
+  
+  .edit__bio__form input {
+    width: 50%;
+    height: 2em;
+    border: 0.1em solid #dbdbdb;
+    border-radius: 0.2em;
+    padding: 0.5em;
+    margin-top: 0.5em;
+  }
+  
+  .edit__bio__form button {
+    margin: 1em 1em 0 0;
+  }
+  
+  .edit__bio__form .cancel__button {
+    background-color: #890000;
+  }
+  
+  #addPhotoInput {
+    display: none;
+  }
+
+  .add-photo-button {
+    transform: scale(3);
+    position: fixed;
+    bottom: 5em;
+    right: 7em;
+    cursor: pointer;
+  }
+
+  .posts{
+    flex: 0.7;
+  }
+
+  .container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
