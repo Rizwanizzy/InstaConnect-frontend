@@ -158,6 +158,7 @@ width:300px;
 text-align:center;
 color:red;
 font-size:14px;
+z-index:1;
 `
 const SocialMediaDiv = styled.div`
 display:flex;
@@ -277,7 +278,7 @@ return (
             <ErroDiv>
                    {errors.email && <p> {errors.email.message} </p>} 
                    {errors.password && <p>{ errors.password.message } </p>}
-                   {errMsg && <p>{ errMsg.non_field_errors[0] }</p>}
+                   {/* {errMsg && <p>{ errMsg.non_field_errors[0] }</p>} */}
                    {status === 400 && 'Email or Password is Incorrect'}
             </ErroDiv>
         </Form>

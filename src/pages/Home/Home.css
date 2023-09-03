@@ -10,3 +10,9 @@
 .homepage__timeline{
     flex: 0.8;
 }
+
+.logoutButton{
+    background: black;
+    color: aliceblue;
+    cursor: pointer;
+}

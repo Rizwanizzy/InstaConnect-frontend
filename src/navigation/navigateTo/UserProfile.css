@@ -7,7 +7,7 @@
     flex: 0.2;
 }
 
-button {
+button > .edit__button,.cancel__button, .save, .profile__photo{
     cursor: pointer;
     padding: unset;
     border: unset;
@@ -87,9 +87,10 @@ button {
     align-items: center;
 }
 
-.edit{
+.edit__button{
     margin-top: 23px;
     margin-left: 10px;
+    cursor: pointer;
 }
 
   .profile__info button:hover {

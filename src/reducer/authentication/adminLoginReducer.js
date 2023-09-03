@@ -11,6 +11,8 @@ const initialState = {
   
   export const adminLoginReducer = (state = initialState, action) => {
     const { type, payload } = action;
+    console.log("Action Type:", type);
+    console.log("Payload:", payload); 
     switch (type) {
       case adminLoginTypes.ADMIN_LOGIN_REQUEST:
         return {
@@ -20,21 +22,26 @@ const initialState = {
       case adminLoginTypes.ADMIN_LOGIN_SUCCESS:
         localStorage.setItem('access', payload.access);
         localStorage.setItem('refresh', payload.refresh);
+        const userRole =payload?.userRole || null;
+        console.log("User Role in ADMIN_LOGIN_SUCCESS:",userRole);
         return {
           ...state,
           isLoading: false,
           isLoggedIn: true,
-          userRole: payload.userRole,
+          userRole: userRole,
         };
       case adminLoginTypes.ADMIN_LOGIN_FAILURE:
       case logoutTypes.LOGOUT:
         localStorage.removeItem('access');
         localStorage.removeItem('refresh');
+        const errorUserRole=payload?.userRole || null;
+        console.log("User Role in ADMIN_LOGIN_FAILURE/LOGOUT:", errorUserRole);
         return {
           ...state,
           isLoading: false,
           isLoggedIn: false,
           errMsg: payload,
+          userRole:errorUserRole
         };
       default:
         return state;

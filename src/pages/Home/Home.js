@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { logout } from '../../action/authentication/logoutAction';
 // import Login from '../Login/Login';
 import { Navigate } from 'react-router';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import Sidenav from '../../navigation/Sidenav';
 import Timeline from '../../timeline/Timeline';
 import './Home.css'
@@ -38,18 +38,19 @@ import './Home.css'
 // //   border-radius: 50%;
 // // `;
 
-const LogoutButton = styled.button`
-  background-color: #ffff;
-  border: none;
-  cursor: pointer;
-  color: #0095f6;
-  font-weight: bold;
-`;
+// const LogoutButton = styled.button`
+//   background-color: black;
+//   border: none;
+//   cursor: pointer;
+//   color: #ffff;
+//   font-weight: bold;
+// `;
 
 const Home = ({ logout }) => {
   const [navigate, setNavigate] = useState(false);
 
   const logout_user = () => {
+    console.log('button clicked')
     logout();
     setNavigate(true);
   };
@@ -75,10 +76,11 @@ const Home = ({ logout }) => {
     // </Wrapper>
     <div className="homepage">
       <div className="homepage__nav">
-        <Sidenav />
-        {localStorage.getItem('access') && (
-            <LogoutButton onClick={logout_user}>Logout</LogoutButton>
+      {localStorage.getItem('access') && (
+            // <LogoutButton onClick={logout_user}>Logout</LogoutButton>
+            <button className='logoutButton' onClick={logout_user}>Logout</button>
           )}
+        <Sidenav />
       </div>
       <div className="homepage__timeline">
         <Timeline />

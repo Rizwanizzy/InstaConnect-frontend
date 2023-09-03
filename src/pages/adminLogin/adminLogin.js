@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
+import { connect,useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { adminLogin } from '../../action/authentication/adminLoginActions';
 import { useForm } from 'react-hook-form'
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from 'yup'
 import { Navigate } from 'react-router-dom';
-import loginImage from '../../images/login_image.PNG'
+import { useNavigate } from 'react-router-dom';
+import loginImage1 from '../../images/login_image1.png'
 import appStores from '../../images/appstore.png'
 import styled from 'styled-components'
 import '../../assets/css/fonts.css'
@@ -122,6 +123,7 @@ width:300px;
 text-align:center;
 color:red;
 font-size:14px;
+z-index:1;
 `
 const SocialMediaDiv = styled.div`
 display:flex;
@@ -179,32 +181,36 @@ let LoginSchema = yup.object().shape({
     email: yup.string().email().required('Enter Email'),
     password:yup.string().required('Enter password')
 })
-const AdminLogin = ({login, isLoading, isLoggedIn, errMsg,status,userRole}) =>{
+const AdminLogin = ({isLoading, isLoggedIn, errMsg,status,userRole}) =>{
+  const dispatch = useDispatch()
+  const navigate =useNavigate()
 const {register, handleSubmit, formState: { errors, isValid}} =useForm({
     resolver: yupResolver(LoginSchema),
     mode: "onChange" ,
 })
-console.log('before onbumit in adminlogin page')
-const onSubmit = (data) => {
-  adminLogin(data.email, data.password)
+console.log('before onsubmit in adminlogin page')
+console.log('userRole:',userRole)
+const onSubmit = async (data) => {
+    await dispatch(adminLogin(data.email, data.password))
+
+    if (status === 404){
+      console.log('user is not registered')
+    }
 }
 
 useEffect(() =>{
-  if ( userRole === 'superuser' ){
-    console.log('user role:',userRole);
-  }else{
-    console.log("user role:",userRole)
-    console.log("superuser cannot log in")
+  if ( isLoggedIn ){
+    navigate('/adminhome')
   }
-},[userRole])
+},[isLoggedIn,navigate])
 
 if(localStorage.getItem('access')){
-    return <Navigate to='/adminHome'/>
+    return <Navigate to='/adminhome'/>
 }
 return (
 <Wrapper>
     <LeftDiv>
-        <Img src={loginImage} alt='login Image'/>
+        <Img src={loginImage1} alt='login Image'/>
     </LeftDiv>
     <RightDiv>
         <Form onSubmit = {handleSubmit(onSubmit)}>
@@ -219,13 +225,14 @@ return (
                 </FormDiv>
                 <FormDiv>
                     {isValid ? <Button type='submit'>{isLoading?<Spinner/>:'Log In'}</Button>:<DisabledButton>Log In</DisabledButton>}
-                    {isLoggedIn && <Navigate to='/adminHome'/>}
+                    {isLoggedIn && <Navigate to='/adminhome'/>}
                 </FormDiv>
             <ErroDiv>
                    {errors.email && <p> {errors.email.message} </p>} 
                    {errors.password && <p>{ errors.password.message } </p>}
-                   {errMsg && <p>{ errMsg.non_field_errors[0] }</p>}
+                   {/* {errMsg && <p>{ errMsg.non_field_errors[0] }</p>} */}
                    {status === 400 && 'Email or Password is Incorrect'}
+                   {status === 404 && 'User is not registered'}
             </ErroDiv>
         </Form>
         <SocialMediaDiv>
@@ -252,6 +259,6 @@ const mapStateToProps = state => {
     }
 }
 const mapDispatchToProps = {
-adminLogin:adminLogin,
+  adminLogin:adminLogin,
 }
 export default connect(mapStateToProps, mapDispatchToProps)(AdminLogin)

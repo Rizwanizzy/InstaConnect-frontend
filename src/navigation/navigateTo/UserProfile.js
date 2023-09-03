@@ -24,7 +24,7 @@ const UserProfile = () => {
         setEditFormIsOpen(false)
     }
 
-    const editButton=<button className='edit' onClick={() => setEditFormIsOpen(true)}>Edit</button>
+    const editButton=<button className='edit__button' onClick={() => setEditFormIsOpen(true)}>Edit</button>
     const updateProfilePhoto = async () =>{
         const newProfilePhoto = await getPhotoUrl('#profilePhotoInput')
         setProfilePhoto(newProfilePhoto)
@@ -35,7 +35,7 @@ const UserProfile = () => {
             <input type="text" id='' name='aboutUser' placeholder='About' />
             <br />
             <button type='button' className='cancel__button' onClick={() => setEditFormIsOpen(false)}>Cancel</button>
-            <button type='submit'>Save</button>
+            <button type='submit' className='save'>Save</button>
         </form>
     )
   return (

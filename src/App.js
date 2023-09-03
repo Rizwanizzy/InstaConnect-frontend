@@ -14,6 +14,7 @@ import './App.css'
 import Create from "./navigation/navigateTo/Create";
 import AdminLogin from "./pages/adminLogin/adminLogin";
 import UserProfile from "./navigation/navigateTo/UserProfile";
+import AdminHome from "./pages/AdminHome/AdminHome";
 
 
 const App = () => {
@@ -28,6 +29,7 @@ const App = () => {
               <Route path="/userprofile" element={<UserProfile />} />
               <Route path="/create" element={<Create />} />
               <Route path="/adminlogin" element={<AdminLogin />} />
+              <Route path="/adminhome" element={<AdminHome />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/activate" element={<Activate />} />
               <Route path="/activate/:uid/:token" element={<Activation />} />

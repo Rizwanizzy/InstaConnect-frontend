@@ -33,9 +33,17 @@ export const adminLogin = (email, password) => async dispatch => {
         dispatch({
             type: adminLoginTypes.ADMIN_LOGIN_FAILURE,
         });
-        dispatch({
-            type: GET_ERRORS,
-            payload: error
-        });
+        if (err.response.status === 404){
+            dispatch({
+                type:GET_ERRORS,
+                payload:{msg:"User is not registered",status:404}
+            })
+        }else{
+            dispatch({
+                type: GET_ERRORS,
+                payload: error
+            });
+        }
+        
     }
 };
