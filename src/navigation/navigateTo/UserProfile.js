@@ -1,17 +1,29 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Sidenav from '../Sidenav'
 import getPhotoUrl from 'get-photo-url'
 import './UserProfile.css'
 import profileIcon from '../../images/Default-Profile-Picture1.png'
 import Gallery from './Gallery'
 import { useState } from 'react'
+import { fetchUserData } from '../../action/userSide/userProfileAction'
+import { useDispatch, useSelector } from 'react-redux'
 
 const UserProfile = () => {
     const [userDetails,setUserDetails]=useState({
         name:'Rizwan__izzy',
         about:'Building Newdev.io - Learn to code and connect'
     })
+    // const userData =useSelector((state) => state.user.userData)
+    // const dispatch =useDispatch()
 
+    // useEffect(() =>{
+    //     dispatch(fetchUserData())
+    // },[dispatch])
+
+    // const name=userData?.name
+    // const about=userData?.about
+
+    // console.log('userData',userData)
     const [editFormIsOpen,setEditFormIsOpen]=useState(false)
     const [profilePhoto,setProfilePhoto]=useState(profileIcon)
 

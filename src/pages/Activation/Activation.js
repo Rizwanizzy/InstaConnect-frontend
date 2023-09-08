@@ -105,7 +105,7 @@ const Activation = ({activating,activation,isActivated,errMsg}) => {
           <H2>Instaconnect</H2>
           <H4>Please verify the Account</H4>
           <Button type='submit' onClick={activate}>{activating? <Spinner/>:'Verify'}</Button>
-          {isActivated && <Navigate to='/'/>}
+          {isActivated && <Navigate to='/login'/>}
           <ErrorDiv>
             {errMsg && errMsg.detail === "Stale token for given user." && <div>User is already verified go to 
               <Link style={{textDecoration:'none' , fontSize:'14px' , fontFamily:'Roboto Medium'}}>Login</Link></div>}

@@ -68,22 +68,22 @@ const Home = () => {
                     <h3>USERS</h3>
                     <BsPeopleFill className='card_icon'/>
                 </div>
-                <h1>300</h1>
+                <h1>70</h1>
             </div>
             <div className="card">
                 <div className="card-inner">
                     <h3>REPORTS</h3>
                     <BsMenuButtonWideFill className='card_icon'/>
                 </div>
-                <h1>300</h1>
+                <h1>15</h1>
             </div>
-            <div className="card">
+            {/* <div className="card">
                 <div className="card-inner">
-                    <h3>POSTS</h3>
+                    <h3>REPORTS</h3>
                     <BsListCheck className='card_icon'/>
                 </div>
-                <h1>300</h1>
-            </div>
+                <h1>15</h1>
+            </div> */}
         </div>
         <div className="charts">
             <ResponsiveContainer width="100%" height="100%">

@@ -7,6 +7,7 @@ import Header from './Header';
 import Sidebar from './Sidebar';
 import Home from './Home'
 import './AdminHome.css'
+import { isAdminAuthenticated } from './authHelper';
 
 const AdminHome = ({logout}) => {
     const [openSidbarToggle,setOpenSidebarToggle]=useState(false)
@@ -23,19 +24,25 @@ const AdminHome = ({logout}) => {
         return <Navigate to = '/adminlogin'/>
     }
 
-    return (
-    <div className='body'>
-        <div className="grid-container">
-            <Header openSidebar={openSidebar} />
-            <Sidebar openSidebarToggle={openSidbarToggle} openSidebar={openSidebar} />
-            <Home />
-            {localStorage.getItem('access') ?  <button className='sidebar-list-item' onClick={logout_user}>Logout</button>: <AdminLogin/> }
-        </div>
-        
-    </div>
-    )
+    if (isAdminAuthenticated){
+        return (
+            <div className='body'>
+                <div className="grid-container">
+                    <Header openSidebar={openSidebar} />
+                    <Sidebar openSidebarToggle={openSidbarToggle} openSidebar={openSidebar} />
+                    <Home />
+                    {localStorage.getItem('access') ?  <button className='sidebar-list-item' onClick={logout_user}>Logout</button>:null }
+                </div>
+                
+            </div>
+            )
+    }else{
+        return <Navigate to='/adminlogin' />
+    }
+    
 }
 const mapDispatchToProps = {
     logout : logout
 }
+
 export default connect(null, mapDispatchToProps)(AdminHome)

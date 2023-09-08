@@ -15,6 +15,7 @@ import Create from "./navigation/navigateTo/Create";
 import AdminLogin from "./pages/adminLogin/adminLogin";
 import UserProfile from "./navigation/navigateTo/UserProfile";
 import AdminHome from "./pages/AdminHome/AdminHome";
+import AdminUsers from "./pages/AdminHome/AdminUsers";
 
 
 const App = () => {
@@ -30,6 +31,7 @@ const App = () => {
               <Route path="/create" element={<Create />} />
               <Route path="/adminlogin" element={<AdminLogin />} />
               <Route path="/adminhome" element={<AdminHome />} />
+              <Route path="/adminusers" element={<AdminUsers />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/activate" element={<Activate />} />
               <Route path="/activate/:uid/:token" element={<Activation />} />

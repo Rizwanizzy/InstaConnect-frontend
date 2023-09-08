@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 import { registrationReducer ,activationReducer,loginReducer,adminLoginReducer } from "./authentication";
 import { errorReducer } from "./errorReducer/errorReducer";
+import { userProfileReducer } from "./userSide/userProfileReducer";
 
 const rootReducer = combineReducers({
     registrationReducer,
@@ -8,5 +9,6 @@ const rootReducer = combineReducers({
     loginReducer,
     errorReducer,
     adminLoginReducer,
+    userProfileReducer,
 });
 export default rootReducer;
