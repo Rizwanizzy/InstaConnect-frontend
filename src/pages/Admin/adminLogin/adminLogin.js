@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react'
 import { connect,useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom';
-import { adminLogin } from '../../action/authentication/adminLoginActions';
+import { adminLogin } from '../../../action/authentication/adminLoginActions';
 import { useForm } from 'react-hook-form'
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from 'yup'
 import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import loginImage1 from '../../images/login_image1.png'
-import appStores from '../../images/appstore.png'
+import loginImage1 from '../../../images/login_image1.png'
+import appStores from '../../../images/appstore.png'
 import styled from 'styled-components'
-import '../../assets/css/fonts.css'
+import '../../../assets/css/fonts.css'
 
 const Wrapper = styled.div `
 display : grid;

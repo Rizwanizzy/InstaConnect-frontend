@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import logo from '../../images/logo.png'
+import logo from '../../../images/logo.png'
 
 const Wrapper = styled.div `
 display : grid;

@@ -1,16 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link , Navigate } from 'react-router-dom';
-import { registration } from '../../action/authentication' 
-import { googleLogin } from '../../action/authentication/googleLoginAction';
-import { facebookLogin } from '../../action/authentication/facebookLoginAction'
+import { registration } from '../../../action/authentication' 
+import { googleLogin } from '../../../action/authentication/googleLoginAction';
+import { facebookLogin } from '../../../action/authentication/facebookLoginAction'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from 'yup'
 import styled from 'styled-components'
 import ReactGoogleLogin from 'react-google-login'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
-import appStores from '../../images/appstore.png'
+import appStores from '../../../images/appstore.png'
 
 
 const Wrapper = styled.div `

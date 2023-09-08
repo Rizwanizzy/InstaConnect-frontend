@@ -1,19 +1,19 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
-import { login } from '../../action/authentication/loginActions';
-import { googleLogin } from '../../action/authentication/googleLoginAction';
-import { facebookLogin } from '../../action/authentication/facebookLoginAction';
+import { login } from '../../../action/authentication/loginActions';
+import { googleLogin } from '../../../action/authentication/googleLoginAction';
+import { facebookLogin } from '../../../action/authentication/facebookLoginAction';
 import { useForm } from 'react-hook-form'
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from 'yup'
 import { Navigate } from 'react-router-dom';
 import ReactGoogleLogin from 'react-google-login'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
-import loginImage1 from '../../images/login_image1.png'
-import appStores from '../../images/appstore.png'
+import loginImage1 from '../../../images/login_image1.png'
+import appStores from '../../../images/appstore.png'
 import styled from 'styled-components'
-import '../../assets/css/fonts.css'
+import '../../../assets/css/fonts.css'
 
 const Wrapper = styled.div `
 display : grid;

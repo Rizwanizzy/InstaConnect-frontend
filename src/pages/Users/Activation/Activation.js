@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { activation } from '../../action/authentication/activationActions'
+import { activation } from '../../../action/authentication/activationActions'
 import { Navigate } from 'react-router'
 import { Link } from 'react-router-dom'
-import logo from '../../images/logo.png'
+import logo from '../../../images/logo.png'
 import { useParams } from 'react-router'
 
 const Wrapper = styled.div `

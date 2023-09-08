@@ -1,22 +1,21 @@
 import React from "react";
 import {BrowserRouter as Router,Route,Routes} from "react-router-dom"
 import {createBrowserHistory} from "history"
-import Home from "./pages/Home/Home";
-import Login from "./pages/Login/Login"
-import Signup from "./pages/Signup/Signup"
-import Activation from "./pages/Activation/Activation"
-import Activate from "./pages/Activation/Activate"
-import Passwordreset from "./pages/Passwordreset/Passwordreset"
-import Passwordresetconfirm from "./pages/Passwordresetconfirm/Passwordresetconfirm"
+import Home from "./pages/Users/Home/Home";
+import Login from "./pages/Users/Login/Login"
+import Signup from "./pages/Users/Signup/Signup"
+import Activation from "./pages/Users/Activation/Activation"
+import Activate from "./pages/Users/Activation/Activate"
+import Passwordreset from "./pages/Users/Passwordreset/Passwordreset"
+import Passwordresetconfirm from "./pages/Users/Passwordresetconfirm/Passwordresetconfirm"
 import { Provider } from "react-redux";
 import store from "./store";
 import './App.css'
-import Create from "./navigation/navigateTo/Create";
-import AdminLogin from "./pages/adminLogin/adminLogin";
-import UserProfile from "./navigation/navigateTo/UserProfile";
-import AdminHome from "./pages/AdminHome/AdminHome";
-import AdminUsers from "./pages/AdminHome/AdminUsers";
-
+import Create from "./pages/Users/navigation/navigateTo/Create";
+import AdminLogin from "./pages/Admin/adminLogin/adminLogin";
+import UserProfile from './pages/Users/navigation/navigateTo/UserProfile'
+import AdminHome from "./pages/Admin/AdminHome/AdminHome";
+import AdminUsers from "./pages/Admin/AdminHome/AdminUsers";
 
 const App = () => {
   const history=createBrowserHistory()

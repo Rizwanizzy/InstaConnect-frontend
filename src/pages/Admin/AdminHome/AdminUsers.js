@@ -1,15 +1,15 @@
-import React,{ useState } from 'react'
+import React,{ useState,useEffect } from 'react'
 import Header from './Header'
 import Sidebar from './Sidebar'
 import { Navigate,useNavigate } from 'react-router'
 import AdminLogin from '../adminLogin/adminLogin';
 import './AdminUsers.css'
-import { logout } from '../../action/authentication/logoutAction';
+import { logout } from '../../../action/authentication/logoutAction';
 import { Button } from '@mui/material';
 import {connect} from 'react-redux'
-import { isAdminAuthenticated } from './authHelper';
 
 const AdminUsers = ({logout}) => {
+    const [isAdminAuthenticated,setIsAdminAuthenticated] =useState( localStorage.getItem('access') !==null)
     const data = [
         { name: "Anom"},
         { name: "Megha"},
@@ -20,6 +20,11 @@ const AdminUsers = ({logout}) => {
         logout()
         setNavigate(true)
     }
+
+    useEffect(()=>{
+        setIsAdminAuthenticated(localStorage.getItem('access') !== null)
+    },[])
+
     if(navigate){
         return <Navigate to = '/adminlogin'/>
     }

@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { logout } from '../../action/authentication/logoutAction'
+import { logout } from '../../../action/authentication/logoutAction'
 import AdminLogin from '../adminLogin/adminLogin';
 import { Navigate } from 'react-router';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import Home from './Home'
 import './AdminHome.css'
-import { isAdminAuthenticated } from './authHelper';
 
 const AdminHome = ({logout}) => {
+    const [isAdminAuthenticated,setIsAdminAuthenticated] =useState( localStorage.getItem('access') !==null)
     const [openSidbarToggle,setOpenSidebarToggle]=useState(false)
 
     const openSidebar = () =>{
@@ -20,6 +20,11 @@ const AdminHome = ({logout}) => {
         logout();
         setNavigate(true)
     }
+
+    useEffect(()=>{
+        setIsAdminAuthenticated(localStorage.getItem('access') !== null)
+    },[])
+
     if(navigate){
         return <Navigate to = '/adminlogin'/>
     }

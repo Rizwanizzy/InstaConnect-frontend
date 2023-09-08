@@ -2,13 +2,15 @@ import React, { useEffect } from 'react'
 import Sidenav from '../Sidenav'
 import getPhotoUrl from 'get-photo-url'
 import './UserProfile.css'
-import profileIcon from '../../images/Default-Profile-Picture1.png'
+import profileIcon from '../../../../images/Default-Profile-Picture1.png'
 import Gallery from './Gallery'
 import { useState } from 'react'
-import { fetchUserData } from '../../action/userSide/userProfileAction'
+import { fetchUserData } from '../../../../action/userSide/userProfileAction'
 import { useDispatch, useSelector } from 'react-redux'
+import { Navigate } from 'react-router'
 
 const UserProfile = () => {
+    const [isUserAuthenticated,setIsUserAuthenticated] =useState( localStorage.getItem('access') !==null)
     const [userDetails,setUserDetails]=useState({
         name:'Rizwan__izzy',
         about:'Building Newdev.io - Learn to code and connect'
@@ -50,42 +52,51 @@ const UserProfile = () => {
             <button type='submit' className='save'>Save</button>
         </form>
     )
-  return (
-    <div>
-        <div className="userPage">
-            <div className="homepage__nav">
-                <Sidenav />    
-            </div>
-            <div className="userProfile">
-                <input type="file" accept='image/*' name='photo' id='profilePhotoInput' />
-                <label htmlFor="profilePhotoInput" onClick={updateProfilePhoto}>
-                    <div className="profile__photo" role='button' title='Click to edit photo'>
-                        <img src={profilePhoto} alt="profile" />
+    useEffect(()=>{
+        setIsUserAuthenticated(localStorage.getItem('access') !== null)
+    },[])
+
+    if (isUserAuthenticated){
+        return (
+            <div>
+                <div className="userPage">
+                    <div className="homepage__nav">
+                        <Sidenav />    
                     </div>
-                </label>
-                
-                <div className="profile__info">
-                    <div className="userName">
-                        <p className="name">{userDetails.name}</p>
+                    <div className="userProfile">
+                        <input type="file" accept='image/*' name='photo' id='profilePhotoInput' />
+                        <label htmlFor="profilePhotoInput" onClick={updateProfilePhoto}>
+                            <div className="profile__photo" role='button' title='Click to edit photo'>
+                                <img src={profilePhoto} alt="profile" />
+                            </div>
+                        </label>
+                        
+                        <div className="profile__info">
+                            <div className="userName">
+                                <p className="name">{userDetails.name}</p>
+                            </div>
+                            
+                            <p className="about">{userDetails.about}</p>
+                            
+                            {editFormIsOpen ? editForm : editButton}
+                            
+                        </div>
+                        
                     </div>
                     
-                    <p className="about">{userDetails.about}</p>
-                    
-                    {editFormIsOpen ? editForm : editButton}
-                    
+                </div>
+                <div className="container">
+                    <div className="posts">
+                        <Gallery />
+                    </div>
                 </div>
                 
             </div>
-            
-        </div>
-        <div className="container">
-            <div className="posts">
-                <Gallery />
-            </div>
-        </div>
-        
-    </div>
-  )
+          )
+    }else{
+        return <Navigate to='/login' />
+    }
+  
 }
 
 export default UserProfile

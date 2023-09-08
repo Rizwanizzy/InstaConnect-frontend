@@ -9,7 +9,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
 import { Avatar } from '@mui/material'
-import profileIcon from '../images/Default-Profile-Picture1.png' 
+import profileIcon from '../../../images/Default-Profile-Picture1.png'
 // import Create from './navigateTo/Create';
 const Sidenav = () => {
   return (
